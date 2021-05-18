@@ -6,8 +6,6 @@ window.onload = function() {
     const btn_submit_post = document.getElementById('submit_post_form');
     const template_post = document.getElementById("template-post-item");
     const template_comment = document.getElementById("template-comment-item");
-    console.log('template_post')
-    console.log(template_post)
     const container_posts = document.getElementById('area_posts')
 
     const removePost=(event)=>{
@@ -18,7 +16,6 @@ window.onload = function() {
             .then(getPosts)
     }
     const removeComment=(event)=>{
-        console.log("removeComment")
         event.preventDefault();
         const postID= event.target.value.split('#-#')[0];
         const commentID= event.target.value.split('#-#')[1];
@@ -39,11 +36,7 @@ window.onload = function() {
     }
     const renderComments = (posts)=>{
         posts.forEach(post => getCommentsForPost(post.id))
-        console.log("DELeTE")
-        console.log(document.getElementsByName('delete-comment'));
         document.getElementsByName('delete-comment').forEach(item => {console.log(item);item.addEventListener('click',removeComment)})
-        console.log(document.getElementsByName('delete-comment'));
-
     }
     const renderCommentsForPost=(comments,postID) =>{
         let commentHTML ='';
@@ -116,7 +109,6 @@ window.onload = function() {
         area_posts.appendChild(container)
         document.getElementsByName('delete-post').forEach(item => item.addEventListener('click',removePost))
         document.getElementsByName('add-comment').forEach(item => item.addEventListener('click',addComment))
-        console.log(posts)
         return posts
     }
     /**
