@@ -1,0 +1,20 @@
+body{
+    font-family: "PT Serif Caption sans-serif" ;
+}
+.post{
+    background-color: aqua;
+    width:300px;
+    padding:20px;
+}
+.post-title{
+    color:red;
+}
+.row{
+    display:flex;
+    flex-direction: column;
+}
+
+
+label, button, input{
+    margin: 5px;
+}
