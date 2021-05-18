@@ -11,7 +11,6 @@ const posts = {};
  */
 app.get('/comments', (req, res) => {
     try {
-        console.log('Get it');
         res.send(posts);
     }
     catch(e) {
