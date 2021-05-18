@@ -4,14 +4,15 @@ const express = require('express');
 
 const app = express();
 app.use(bodyParser.json());
-const posts = {};
+
+const commentsByPostId = {};
 
 /**
- * Get all comments
+ * Get comments to post
  */
-app.get('/comments', (req, res) => {
+app.get('/posts/:id/comments', (req, res) => {
     try {
-        res.send(posts);
+        res.send(commentsByPostId[req.params.id] || []);
     }
     catch(e) {
         res.status(500);
@@ -19,37 +20,59 @@ app.get('/comments', (req, res) => {
 });
 
 /**
- * Post single comment
- * @param title
- * tile wird als body(json) übergeben
+ * Get single comment to a post
  */
-app.post('/comments', (req, res) => {
+app.get('/posts/:id/comments/:comid', (req, res) => {
     try {
-        const id = randomBytes(4).toString('hex');
-        const { title } = req.body;
+        console.log(req.params.comid)
+        res.send(commentsByPostId[req.params.id].find(x => x.id === req.params.comid) || []);
+    }
+    catch(e) {
+        res.status(500);
+    }
+});
+
+
+/**
+ * Post comment to Post
+ * @param content
+ * content wird als body(json) übergeben
+ */
+app.post('/posts/:id/comments', (req, res) => {
+    try {
+        const commentId = randomBytes(4).toString('hex');
+        const { content } = req.body;
+        console.log('1post comment!')
+        const comments = commentsByPostId[req.params.id] || [];
+        console.log('2post comment!')
+        comments.push({id: commentId, content});
+        console.log('3post comment!')
+        commentsByPostId[req.params.id] = comments;
+        console.log('4post comment!')
+
         console.log(req.body);
-        posts[id] = {
-            id,
-            title: title
-        };
-        console.log(posts[id]);
-        res.status(201).send(posts[id]);
+        console.log(comments);
+        res.status(201).send(comments);
     }
     catch(e) {
         res.status(500);
     }
 });
+
 
 
 /**
  * Delete single comments
  * @param id
  */
-app.delete('/comments/:id', (req, res) => {
+app.delete('/posts/:id/comments/:comid', (req, res) => {
     try {
         let postId = req.params.id;
-        delete posts[postId];
-        res.send(posts);
+        let comId = req.params.comid;
+        let commentToDelete = commentsByPostId[req.params.id];
+        delete commentToDelete.find( x => x.id === req.params.comid);
+        console.log(commentToDelete.find( x => x.id === req.params.comid))
+        res.send(commentsByPostId[req.params.id]);
     }
     catch(e) {
         res.status(500);

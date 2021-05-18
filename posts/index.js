@@ -4,6 +4,8 @@ const express = require('express');
 
 const app = express();
 app.use(bodyParser.json());
+
+
 const posts = {};
 
 /**
@@ -39,7 +41,6 @@ app.post('/posts', (req, res) => {
         res.status(500);
     }
 });
-
 
 /**
  * Delete single post
