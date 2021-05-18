@@ -24,24 +24,31 @@
 </body>
 
 
-<div id="template_area">
-    <div class="post" id="template_post">
-        <h3 class="post-title" name="post-title"></h3>
-        <button class="btn btn-delete" value="" >X</button>
+<script id="template-post-item" type="text/template">
+    <div class="post" id="post_{{POST_ID}}">
+        <h3 class="post-title" name="post-title">{{POST_TITLE}}</h3>
+        <button class="btn btn-delete btn-delete-post" value="{{POST_ID}}" name="delete-post" >🗑</button>
         <div class="comment-section">
             <div>
-                <p class="details">1</p>
+                <p class="details" id="comment-counter-{{POST_ID}}"></p>
                 <i class="details">comments:</i>
-                <ul>
-                    <li>Im a comment</li>
+                <ul class="hide" id="comments-{{POST_ID}}">
+
                 </ul>
                 <form class="row">
                     <label for="title">Comment</label>
-                    <input name="title">
-                    <button>Submit</button>
+                    <input name="comment" id="comment_{{POST_ID}}">
+                    <button name="add-comment" value="{{POST_ID}}">Submit</button>
                 </form>
             </div>
         </div>
     </div>
-</div>
+</script>
+<script id="template-comment-item" type="text/template">
+    <li class="comment-row">
+        <p class="details" style="width:90%">{{COMMENT}}</p>
+        <button id="delete-comment-{{POST_ID}}-{{COMMENT_ID}}" class="btn btn-delete" value="{{POST_ID}}#-#{{COMMENT_ID}}" name="delete-comment" >🗑</button>
+
+    </li>
+</script>
 </html>

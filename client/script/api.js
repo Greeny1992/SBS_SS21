@@ -16,7 +16,7 @@ const  postData = async (url = '', data = {})=> {
     });
     return response.json(); // parses JSON response into native JavaScript objects
 }
-const  deletePost = async (url = '')=> {
+const  deleteItem = async (url = '')=> {
     const response = await fetch(url, {
         method: 'DELETE',
         headers: {
@@ -25,4 +25,3 @@ const  deletePost = async (url = '')=> {
     }).catch(console.error)
     return response.json()
 }
-

@@ -1,9 +1,11 @@
 const { randomBytes } = require('crypto');
 const bodyParser = require('body-parser')
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors())
 
 const commentsByPostId = {};
 
@@ -70,7 +72,7 @@ app.delete('/posts/:id/comments/:comid', (req, res) => {
         let postId = req.params.id;
         let comId = req.params.comid;
         let commentToDelete = commentsByPostId[req.params.id];
-        delete commentToDelete.find( x => x.id === req.params.comid);
+        delete commentToDelete.find(x => x.id === req.params.comid);
         console.log(commentToDelete.find( x => x.id === req.params.comid))
         res.send(commentsByPostId[req.params.id]);
     }

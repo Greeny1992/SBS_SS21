@@ -21,6 +21,11 @@ header{
     display: inline;
 }
 .btn-delete{
+    width:30px;
+    height: 30px;
+    text-align: center;
+}
+.btn-delete-post{
     position: absolute;
     right:10px;
     top:10px;
@@ -38,6 +43,11 @@ header{
     justify-content: center;
     align-items: center;
 }
+.comment-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .row{
     display:flex;
     flex-direction: row;
@@ -45,7 +55,7 @@ header{
     justify-content: center;
 
 }
-#template_area{
+#template_area,.hide{
     display: none;
 }
 
@@ -55,4 +65,5 @@ label, button, input{
 .details{
     display:inline;
 }
+
 
