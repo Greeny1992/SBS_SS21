@@ -7,10 +7,11 @@ app.use(bodyParser.json());
 const posts = {};
 
 /**
- * Get all post
+ * Get all comments
  */
-app.get('/posts', (req, res) => {
+app.get('/comments', (req, res) => {
     try {
+        console.log('Get it');
         res.send(posts);
     }
     catch(e) {
@@ -19,11 +20,11 @@ app.get('/posts', (req, res) => {
 });
 
 /**
- * Post single post
+ * Post single comment
  * @param title
  * tile wird als body(json) übergeben
  */
-app.post('/posts', (req, res) => {
+app.post('/comments', (req, res) => {
     try {
         const id = randomBytes(4).toString('hex');
         const { title } = req.body;
@@ -42,10 +43,10 @@ app.post('/posts', (req, res) => {
 
 
 /**
- * Delete single post
+ * Delete single comments
  * @param id
  */
-app.delete('/posts/:id', (req, res) => {
+app.delete('/comments/:id', (req, res) => {
     try {
         let postId = req.params.id;
         delete posts[postId];
@@ -56,6 +57,6 @@ app.delete('/posts/:id', (req, res) => {
     }
 });
 
-app.listen(4000, () => {
-   console.log('Listening on 4000')
+app.listen(4001, () => {
+    console.log('Listening on 4001')
 });
