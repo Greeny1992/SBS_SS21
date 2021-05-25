@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const axios = require('axios');
+
 app.use(bodyParser.json());
 app.use(cors())
 const posts = {};
@@ -33,6 +35,15 @@ app.post('/posts', (req, res) => {
             id,
             title: title
         };
+        axios.post('http://localhost:4005/events', {
+            event: {
+                type: 'post',
+                id: id,
+                title: title
+            }
+        }).catch((err) => {
+            console.log(err.message);
+        });
         console.log(posts[id]);
         res.status(201).send(posts[id]);
     }

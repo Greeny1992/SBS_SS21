@@ -3,6 +3,7 @@ window.onload = function() {
     const API_URL="http://localhost:4000"
     const URL_POST = `${API_URL}/posts`
     let URL_COMMENT = `http://localhost:4001/posts/{{POST_ID}}/comments`
+    const URL_AllPosts = 'http://localhost:4003/AllPostsWithComments/'
     const btn_submit_post = document.getElementById('submit_post_form');
     const template_post = document.getElementById("template-post-item");
     const template_comment = document.getElementById("template-comment-item");
@@ -63,7 +64,7 @@ window.onload = function() {
      *
      */
     const getPosts=()=>{
-        fetch(URL_POST)
+        fetch(URL_AllPosts)
             .then(response => response.json())
             .then(renderPosts)
             .then(renderComments)
